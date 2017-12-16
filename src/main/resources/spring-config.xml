@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+				http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+				http://www.springframework.org/schema/context 
+				http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+				http://www.springframework.org/schema/data/mongo 
+				http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+
+
+	<!-- 
+		PLEASE NOTE
+		
+		This configuration must be loaded through the annotation 
+			@ImportResource("classpath:/spring-config.xml")
+		on top of the main application class.
+		
+		This configuration can be replaced using just annotations.
+		See classes in the package
+			"org.rabbithole.mongodb.configs"
+			"org.rabbithole.mongodb.repos"
+	-->
+
+
+	<!-- Annotations -->
+	<context:annotation-config />
+
+
+	<!-- MongoDB -->
+
+	<mongo:db-factory id="mongoFactory" host="localhost" port="27017" dbname="rabbithole" />
+
+	<!-- <mongo:mapping-converter id="mongoConverter" base-package="org.rabbithole.mongodb.converters"> -->
+	<!-- <mongo:custom-converters base-package="org.rabbithole.mongodb.converters" /> -->
+	<!-- </mongo:mapping-converter> -->
+
+	<!-- 
+		PLEASE NOTE
+		
+		Keep the id of this bean as is, otherwise Spring Data automagic repos won't find the bean
+	 -->
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongoFactory" />
+		<!-- <constructor-arg ref="mongoConverter" /> -->
+	</bean>
+
+	<!-- Spring Data automagic repos -->
+	<mongo:repositories base-package="org.rabbithole.mongodb.repos" mongo-template-ref="mongoTemplate" />
+
+
+	<!-- Others -->
+
+	<!-- <bean id="gridFsTemplate" class="org.springframework.data.mongodb.gridfs.GridFsTemplate"> -->
+	<!-- <constructor-arg ref="mongoDbFactory" /> -->
+	<!-- <constructor-arg ref="mongoConverter" /> -->
+	<!-- </bean> -->
+
+	<!-- Post processor to translate any MongoExceptions thrown in @Repository annotated classes -->
+	<bean id="stdPersistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- <bean class="org.rabbithole.mongodb.events.CascadeSaveEventListener" /> -->
+
+</beans>

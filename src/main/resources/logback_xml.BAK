@@ -1,0 +1,30 @@
+<configuration>
+
+	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%gray(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) %cyan(%logger{36}): %msg%n%ex{full}
+			</Pattern>
+		</layout>
+	</appender>
+
+	<logger name="org.springframework.data" level="warn" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<!-- To better log what's happening during the communication with MongoDB, the enable debug for org.springframework.data.mongodb -->
+	<logger name="org.springframework.data.mongodb" level="warn" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="com.rabbithole.mongodb" level="info" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>

@@ -1,0 +1,63 @@
+
+---[ RH - MongoDB - Links ]---
+
+
+---[ Theory
+
+DONE
+https://www.mkyong.com/java8/java-8-optional-in-depth/
+http://www.baeldung.com/spring-data-mongodb-tutorial
+http://www.baeldung.com/queries-in-spring-data-mongodb
+http://www.baeldung.com/spring-data-mongodb-gridfs
+http://www.baeldung.com/spring-data-mongodb-index-annotations-converter
+http://www.baeldung.com/spring-data-mongodb-projections-aggregations
+http://www.baeldung.com/cascading-with-dbref-and-lifecycle-events-in-spring-data-mongodb
+http://docs.spring.io/spring-data/data-document/docs/current/reference/html/#mapping-usage-annotations
+https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#mapping-configuration
+https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#mongodb.mapping-usage.events
+
+IN PROGRESS
+https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#auditing
+
+TODO
+http://mongodb.github.io/mongo-java-driver/2.13/getting-started/quick-tour/
+[bulk]
+http://mongodb.github.io/mongo-java-driver/3.4/driver/tutorials/bulk-writes/
+https://stackoverflow.com/questions/35846474/how-to-perform-a-bulk-update-of-documents-in-mongodb-with-java
+https://www.compose.com/articles/bulk-updates-for-all/
+[cross-store]
+https://docs.spring.io/spring-data/data-document/docs/current/reference/html/#mongo.cross.store
+
+
+---[ Frameworks/Platforms
+
+http://mongodb.github.io/morphia/
+
+
+---[ Code
+
+https://www.mkyong.com/spring/spring-mixing-xml-and-javaconfig/
+https://stackoverflow.com/questions/28613685/how-to-configure-spring-repository-to-use-mongotemplate-defined-in-xml-bean
+http://mongojack.org/index.html
+https://gist.github.com/jyemin/84ccac245782f1ebdc98
+https://stackoverflow.com/questions/42386957/how-to-refer-to-another-bean-as-a-property-in-annotation-based-configuration-fil
+https://stackoverflow.com/questions/14876836/file-inside-jar-is-not-visible-for-spring
+https://www.mkyong.com/java/how-to-convert-java-object-to-from-json-jackson/
+http://www.baeldung.com/jackson-object-mapper-tutorial
+https://stackoverflow.com/questions/6846244/jackson-and-generic-type-reference
+http://www.sureshpw.com/2014/04/mongodb-compound-unique-index-with.html
+https://www.programcreek.com/java-api-examples/org.springframework.core.io.FileSystemResource [Example 2]
+http://www.concretepage.com/jackson-api/read-write-json-using-jackson-objectmapper-jsonparser-jsongenerator-example
+https://stackoverflow.com/questions/14515994/convert-json-string-to-pretty-print-json-output-using-jackson
+http://www.baeldung.com/jackson-ignore-properties-on-serialization
+https://stackoverflow.com/questions/13832188/persistenceconstructor-argument-variable-name-doesnt-match-instance-variable-na/13834796#13834796
+https://stackoverflow.com/questions/26120178/spring-data-mongodb-access-default-pojo-converter-from-within-custom-converter
+https://stackoverflow.com/questions/7684223/convert-dbobject-to-a-pojo-using-mongodb-java-driver
+https://stackoverflow.com/questions/35584271/spring-data-mongodb-annotation-createddate-isnt-working-when-id-is-assigned-m
+
+
+---[ Repo / Examples
+
+https://github.com/eugenp/tutorials/tree/master/spring-data-mongodb
+https://gist.github.com/jyemin
+http://source.lishman.com/project/609#card/1108/file/18066

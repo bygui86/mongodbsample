@@ -1,0 +1,97 @@
+
+buildscript {
+	ext {
+		// springBootVersion = "1.5.6.RELEASE"
+		springBootVersion = "2.0.0.M3"
+		queryDslVersion = "4.1.4"
+		jacksonVersion = "2.8.9"
+		jodatimeVersion = "2.9.9"
+		lombokVersion = "1.16.18"
+	}
+	
+	repositories {
+		mavenCentral()
+		// For Spring Boot release candidates / milestones
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	
+	dependencies {
+		// Spring Boot gradle plugin
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+
+// PLEASE NOTE: only buildscript{..} and other plugins{..} script blocks are allowed before plugins{..} blocks, no other statements are allowed.
+plugins {
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.8"
+	// Fix cohesion problem between QueryDSL and Lombok (part 1)
+	id "io.franzbecker.gradle-lombok" version "1.7"
+}
+
+// Fix cohesion problem between QueryDSL and Lombok (part 2)
+project.afterEvaluate {
+	project.tasks.compileQuerydsl.options.compilerArgs = [
+		"-proc:only",
+		"-processor", 
+		project.querydsl.processors() + ',lombok.launch.AnnotationProcessorHider$AnnotationProcessor'
+	]
+}
+
+
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "org.springframework.boot"
+// For Spring Boot release candidates / milestones
+apply plugin: "io.spring.dependency-management"
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+jar {
+    baseName = "rh-mongodb"
+    version =  "0.1"
+}
+
+
+repositories {
+	mavenCentral()
+	// For Spring Boot release candidates / milestones
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+
+	// Spring DevTools
+	// runtime("org.springframework.boot:spring-boot-devtools")
+
+	// Spring Data starter for MongoDB
+	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+	// compile("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+	
+	// Querydsl is a framework which enables the construction of type-safe SQL-like queries for multiple backends including JPA, MongoDB and SQL in Java (http://www.querydsl.com/).
+	compile("com.querydsl:querydsl-apt:${queryDslVersion}")
+	compile("com.querydsl:querydsl-mongodb:${queryDslVersion}")
+	
+	// FasterXML Jackson
+	compile("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
+	
+	// Joda time
+	compile("joda-time:joda-time:${jodatimeVersion}")
+	
+	// Lombok
+	compileOnly("org.projectlombok:lombok:${lombokVersion}")
+	
+	// Testing
+	// testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+	// testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+
+// QueryDSL configs
+querydsl {
+	springDataMongo = true
+}
